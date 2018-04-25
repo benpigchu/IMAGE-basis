@@ -1,0 +1,1 @@
+This folder contains data from http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2 . You should manually download and untar it before run.
