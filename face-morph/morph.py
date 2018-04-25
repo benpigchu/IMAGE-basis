@@ -25,25 +25,17 @@ def morph(image1,image2):
 	points2.append((width2-1,height2//2))
 	points1.append((0,height1//2))
 	points2.append((0,height2//2))
-	print(height1,width1,points1)
-	print(height2,width2,points2)
 	heightt=(height1+height2)//2
 	widtht=(width1+width2)//2
 	pointst=[((p1[0]+p2[0])//2,(p1[1]+p2[1])//2) for p1,p2 in zip(points1,points2)]
 	pointst=[(max([0,min([y,widtht-1])]),max([0,min([x,heightt-1])])) for y,x in pointst]
-	print(heightt,widtht,pointst)
 	rect=(0,0,widtht,heightt)
-	print(rect)
 	subdiv=cv2.Subdiv2D(rect)# this is geometry calculation, not image processing
 	ptid={}
 	for i,pt in enumerate(pointst):
 		ptid[subdiv.insert(pt)]=i
 	triangleList=subdiv.getTriangleList()
-	print(triangleList)
 	output=numpy.zeros((heightt,widtht,3),dtype=numpy.uint8)
-	print(output.shape)
-	print(image1.shape)
-	print(image2.shape)
 	output[heightt-1,widtht-1]=(255,255,255)
 	def getPt(x,y):
 		if not((0<=x<widtht)and(0<=y<heightt)):
@@ -87,8 +79,8 @@ def morph(image1,image2):
 		l=pointst[p1][0]
 		r=pointst[p1][0]
 		def hzline(l,r,y):
-			x=math.floor(l)-2
-			while x<=math.ceil(r)+2:
+			x=math.floor(l)-8
+			while x<=math.ceil(r)+8:
 				paint(x,y,p1,p2,p3)
 				x+=1
 		if dx12>dx13:
